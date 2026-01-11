@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package cyclerent;
-import Model.User;
 /**
  *
  * @author khadk
@@ -22,17 +21,17 @@ public class Signup extends javax.swing.JFrame {
     
 private void signup() {
     String name = jTextField1.getText().trim();
-    String username = jTextField2.getText().trim();
+    String Username = jTextField2.getText().trim();
     String password = new String(jPasswordField1.getPassword());
     
 
-    if (name.isEmpty() || username.isEmpty() || password.isEmpty()) {
+    if (name.isEmpty() || Username.isEmpty() || password.isEmpty()) {
         javax.swing.JOptionPane.showMessageDialog(this, "All fields are required!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         return;
     }
 
     // FIXED: Changed 'user' to 'User' (the class name)
-   Model.User newUser = new Model.User(name, username, password, "user");
+   Model.User newUser = new Model.User(name, Username, password, "User");
 saveUser(newUser);
 
     javax.swing.JOptionPane.showMessageDialog(this, "Signup successful!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);

@@ -22,27 +22,32 @@ public class Login extends javax.swing.JFrame {
         
     }
     // Verify User credentials from the file
-private Model.User verifyLogin(String username, String password) {
+private Model.User verifyLogin(String Username, String password) {
     // 1. HARDCODED USERS (Priority Check)
-    if (username.equals("admin") && password.equals("admin123")) {
+    // Works for 'admin', 'Admin', etc.
+    if (Username.equalsIgnoreCase("admin") && password.equals("admin123")) {
         return new Model.User("System Admin", "admin", "admin123", "admin");
     }
     
-    if (username.equals("user") && password.equals("user123")) {
+    // Works for 'user', 'User', etc.
+    if (Username.equalsIgnoreCase("user") && password.equals("user123")) {
         return new Model.User("Default User", "user", "user123", "user");
     }
 
     // 2. FILE-BASED USERS (Backup Check)
-    java.io.File file = new java.io.File("users.txt");
+    java.io.File file = new java.io.File("Users.txt");
     if (!file.exists()) {
         return null; 
     }
 
     try (java.util.Scanner scanner = new java.util.Scanner(file)) {
         while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+            String line = scanner.nextLine().trim();
+            if (line.isEmpty()) continue; // Skip blank lines
+            
             Model.User user = Model.User.fromString(line); 
-            if (user != null && username.equals(user.getUsername()) && password.equals(user.getPassword())) {
+            // Use equalsIgnoreCase here too for the username
+            if (user != null && Username.equalsIgnoreCase(user.getUsername()) && password.equals(user.getPassword())) {
                 return user; 
             }
         }
@@ -51,6 +56,8 @@ private Model.User verifyLogin(String username, String password) {
     }
     return null;
 }
+    
+    
 // Optional: clear input fields after login attempt
 private void clearFields() {
     jTextField1.setText("");
@@ -63,6 +70,9 @@ private void openSignup() {
     signup.setVisible(true);
     this.dispose(); // close login window
 }
+
+
+
 
 
     /**
@@ -224,25 +234,25 @@ private void openSignup() {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
                                     
-   String username = jTextField1.getText().trim();
+String Username = jTextField1.getText().trim();
     String password = new String(jPasswordField1.getPassword());
 
-    // Call the updated verifyLogin
-    Model.User authenticatedUser = verifyLogin(username, password);
+    Model.User authenticatedUser = verifyLogin(Username, password);
 
     if (authenticatedUser != null) {
         javax.swing.JOptionPane.showMessageDialog(this, "Login Successful! Welcome " + authenticatedUser.getName());
         
-        // Redirect based on role
+        // Use equalsIgnoreCase for the role check to be safe
         if ("admin".equalsIgnoreCase(authenticatedUser.getRole())) {
             new admindashboard().setVisible(true); // Open Admin Dashboard
         } else {
-            new userdashboard().setVisible(true); // Open User Dashboard
+            new userdashboard().setVisible(true); // This opens your provided userdashboard.java
         }
         this.dispose(); // Close login window
     } else {
         javax.swing.JOptionPane.showMessageDialog(this, "Invalid credentials.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
+    } 
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
