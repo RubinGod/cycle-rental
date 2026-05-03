@@ -10,7 +10,7 @@
     <title>Rent <%= c.getName() %></title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
-<body>
+<body class="dark-theme">
     <header>
         <a href="userDashboard" class="logo">Pedal <span>Point</span></a>
         <div class="nav-links"><a href="userDashboard">Back</a></div>

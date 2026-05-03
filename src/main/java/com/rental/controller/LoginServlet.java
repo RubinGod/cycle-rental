@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
             String rememberMe = request.getParameter("rememberMe");
             if ("on".equals(rememberMe)) {
                 jakarta.servlet.http.Cookie cookie = new jakarta.servlet.http.Cookie("rememberedUser", user.getUsername());
-                cookie.setMaxAge(60 * 60 * 24 * 30); // 30 days
+                cookie.setMaxAge(60 * 60 * 24 * 7); // 7 days
                 response.addCookie(cookie);
             } else {
                 jakarta.servlet.http.Cookie cookie = new jakarta.servlet.http.Cookie("rememberedUser", "");

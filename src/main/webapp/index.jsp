@@ -39,12 +39,12 @@
             </div>
             <div class="hero-stats">
                 <div class="stat">
-                    <strong>8+</strong>
+                    <strong>12</strong>
                     <span>Cycle Models</span>
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat">
-                    <strong>रू 500</strong>
+                    <strong>रू 250</strong>
                     <span>Starting Rate/hr</span>
                 </div>
                 <div class="stat-divider"></div>

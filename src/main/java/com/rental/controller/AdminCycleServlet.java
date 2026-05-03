@@ -42,6 +42,12 @@ public class AdminCycleServlet extends HttpServlet {
             int cycleId = Integer.parseInt(request.getParameter("cycleId"));
             cycleDAO.updateStatus(cycleId, "AVAILABLE");
             response.sendRedirect("adminDashboard?msg=Cycle marked as Available! Customer return recorded.");
+        } else if ("updatePrice".equals(action)) {
+            int cycleId = Integer.parseInt(request.getParameter("cycleId"));
+            double hourlyRate = Double.parseDouble(request.getParameter("hourlyRate"));
+            double dailyRate = Double.parseDouble(request.getParameter("dailyRate"));
+            cycleDAO.updatePrices(cycleId, hourlyRate, dailyRate);
+            response.sendRedirect("adminDashboard?msg=Cycle prices updated successfully!");
         } else {
             response.sendRedirect("adminDashboard");
         }

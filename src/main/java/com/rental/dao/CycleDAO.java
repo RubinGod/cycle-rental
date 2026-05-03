@@ -92,4 +92,17 @@ public class CycleDAO {
             e.printStackTrace();
         }
     }
+
+    public void updatePrices(int cycleId, double hourlyRate, double dailyRate) {
+        String sql = "UPDATE cycles SET hourly_rate = ?, daily_rate = ? WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setDouble(1, hourlyRate);
+            ps.setDouble(2, dailyRate);
+            ps.setInt(3, cycleId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

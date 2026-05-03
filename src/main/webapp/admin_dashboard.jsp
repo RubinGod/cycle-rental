@@ -175,10 +175,15 @@
                                                         <p style="color: var(--text-muted); font-size:0.9rem;">
                                                             <%= c.getBrand() %>
                                                         </p>
-                                                        <div class="price-tag">रू <%= (int)c.getHourlyRate() %><span
-                                                                    style="font-size:0.9rem; font-weight:500; color: var(--text-muted);">/hr</span>
-                                                                &nbsp;·&nbsp; रू <%= (int)c.getDailyRate() %><span
-                                                                        style="font-size:0.9rem; font-weight:500; color: var(--text-muted);">/day</span>
+                                                        <div class="price-tag" style="padding: 0; background: none;">
+                                                            <form action="adminCycle" method="POST" style="display:flex; gap:0.25rem; align-items:center;">
+                                                                <input type="hidden" name="action" value="updatePrice">
+                                                                <input type="hidden" name="cycleId" value="<%= c.getId() %>">
+                                                                रू <input type="number" step="0.01" name="hourlyRate" value="<%= c.getHourlyRate() %>" style="width:60px; padding:0.1rem 0.25rem; border:1px solid var(--border); border-radius:4px; font-size:0.9rem;" required><span style="font-size:0.8rem; color: var(--text-muted);">/hr</span>
+                                                                &nbsp;·&nbsp;
+                                                                रू <input type="number" step="0.01" name="dailyRate" value="<%= c.getDailyRate() %>" style="width:60px; padding:0.1rem 0.25rem; border:1px solid var(--border); border-radius:4px; font-size:0.9rem;" required><span style="font-size:0.8rem; color: var(--text-muted);">/day</span>
+                                                                <button type="submit" class="btn" style="padding: 0.15rem 0.4rem; font-size: 0.75rem; margin-left:0.5rem; white-space:nowrap;">Save</button>
+                                                            </form>
                                                         </div>
                                                         <div
                                                             style="margin-top: 1rem; display:flex; flex-direction:column; gap:0.5rem;">
