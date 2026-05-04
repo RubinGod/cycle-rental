@@ -143,6 +143,18 @@
                                                 </div>
                                         </div>
 
+                                        <!-- Bulk Price Form & Action Bar -->
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-main);">Current Fleet</h3>
+                                            <form action="adminCycle" method="POST" id="bulkPriceForm">
+                                                <input type="hidden" name="action" value="bulkUpdatePrices">
+                                                <button type="submit" class="btn btn-primary" style="padding: 0.6rem 1.5rem; display:flex; align-items:center; gap:0.5rem; box-shadow:0 4px 12px rgba(99,102,241,0.25);">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                                    Save All Prices
+                                                </button>
+                                            </form>
+                                        </div>
+
                                         <!-- Cycle Grid -->
                                         <div class="grid">
                                             <% if (cycles !=null) { for (Cycle c : cycles) { %>
@@ -175,15 +187,22 @@
                                                         <p style="color: var(--text-muted); font-size:0.9rem;">
                                                             <%= c.getBrand() %>
                                                         </p>
-                                                        <div class="price-tag" style="padding: 0; background: none;">
-                                                            <form action="adminCycle" method="POST" style="display:flex; gap:0.25rem; align-items:center;">
-                                                                <input type="hidden" name="action" value="updatePrice">
-                                                                <input type="hidden" name="cycleId" value="<%= c.getId() %>">
-                                                                रू <input type="number" step="0.01" name="hourlyRate" value="<%= c.getHourlyRate() %>" style="width:60px; padding:0.1rem 0.25rem; border:1px solid var(--border); border-radius:4px; font-size:0.9rem;" required><span style="font-size:0.8rem; color: var(--text-muted);">/hr</span>
-                                                                &nbsp;·&nbsp;
-                                                                रू <input type="number" step="0.01" name="dailyRate" value="<%= c.getDailyRate() %>" style="width:60px; padding:0.1rem 0.25rem; border:1px solid var(--border); border-radius:4px; font-size:0.9rem;" required><span style="font-size:0.8rem; color: var(--text-muted);">/day</span>
-                                                                <button type="submit" class="btn" style="padding: 0.15rem 0.4rem; font-size: 0.75rem; margin-left:0.5rem; white-space:nowrap;">Save</button>
-                                                            </form>
+                                                        <div style="display:flex; gap:0.75rem; margin-top:1rem; padding:0.75rem; background:var(--bg-main); border-radius:8px; border:1px solid var(--border);">
+                                                            <input type="hidden" name="cycleId" value="<%= c.getId() %>" form="bulkPriceForm">
+                                                            <div style="flex:1;">
+                                                                <label style="font-size:0.7rem; font-weight:600; text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:0.25rem; letter-spacing:0.5px;">Hourly Rate</label>
+                                                                <div style="position:relative;">
+                                                                    <span style="position:absolute; left:0.6rem; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:0.85rem; font-weight:500;">रू</span>
+                                                                    <input type="number" step="0.01" name="hourlyRate" value="<%= c.getHourlyRate() %>" form="bulkPriceForm" style="width:100%; padding:0.4rem 0.4rem 0.4rem 1.6rem; border:1px solid var(--border); border-radius:6px; font-size:0.9rem; background:var(--card-bg); color:var(--text-main); font-weight:600; transition:all 0.2s; outline:none;" required onfocus="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 0 0 3px rgba(99,102,241,0.1)'" onblur="this.style.borderColor='var(--border)'; this.style.boxShadow='none'">
+                                                                </div>
+                                                            </div>
+                                                            <div style="flex:1;">
+                                                                <label style="font-size:0.7rem; font-weight:600; text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:0.25rem; letter-spacing:0.5px;">Daily Rate</label>
+                                                                <div style="position:relative;">
+                                                                    <span style="position:absolute; left:0.6rem; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:0.85rem; font-weight:500;">रू</span>
+                                                                    <input type="number" step="0.01" name="dailyRate" value="<%= c.getDailyRate() %>" form="bulkPriceForm" style="width:100%; padding:0.4rem 0.4rem 0.4rem 1.6rem; border:1px solid var(--border); border-radius:6px; font-size:0.9rem; background:var(--card-bg); color:var(--text-main); font-weight:600; transition:all 0.2s; outline:none;" required onfocus="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 0 0 3px rgba(99,102,241,0.1)'" onblur="this.style.borderColor='var(--border)'; this.style.boxShadow='none'">
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div
                                                             style="margin-top: 1rem; display:flex; flex-direction:column; gap:0.5rem;">

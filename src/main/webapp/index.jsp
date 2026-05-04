@@ -48,7 +48,7 @@
                     <span>Starting Rate/hr</span>
                 </div>
                 <div class="stat-divider"></div>
-                <div class="stat">
+                <div class="stat">x`
                     <strong>24/7</strong>
                     <span>Available</span>
                 </div>
